@@ -2,7 +2,7 @@ import express from "express"
 import "dotenv/config";
 import connection from "./models/index";
 import userRouter from "./routers/userRouter";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 
 
