@@ -7,8 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-
-app.listen(8000,()=>
+const port = process.env.PORT
+app.listen(port || 8001,()=>
 {
     console.log("The server is running successfully ");
 })
