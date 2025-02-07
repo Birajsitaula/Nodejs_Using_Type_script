@@ -1,4 +1,4 @@
-import { DataType, DataTypes } from "sequelize";
+import {  DataTypes } from "sequelize";
 import connection from "./index";
 
 export default connection.define("Kandara",
