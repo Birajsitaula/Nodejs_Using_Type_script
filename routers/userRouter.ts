@@ -22,7 +22,7 @@ router.post("/name",async(req:Request , res:Response)=>
 
     const saltRounds = 10 ;
     const hashPassword :any = await bcrypt.hash(password,saltRounds)
-    const newUser = await  userModel.create(email, hashPassword);
+    const newUser = await  userModel.create({email, password: hashPassword});
     res.status(200).json({message:"user update successfully",newUser})
 
     }
