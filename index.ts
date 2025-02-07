@@ -1,5 +1,9 @@
 import express from "express"
 import "dotenv/config";
+import connection from "./models/index";
+import userRouter from "./routers/userRouter";
+import bcrypt from "bcrypt";
+
 
 
 const app = express();
@@ -7,8 +11,21 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use("/user",userRouter);
+
 const port = process.env.PORT
-app.listen(port || 8001,()=>
+app.listen(port || 8001,async()=>
 {
-    console.log("The server is running successfully ");
+    try{
+        await connection.authenticate();
+        await connection.sync();
+
+        console.log("Database created successfully ")
+
+    }
+    catch(error)
+    {
+        console.log("There was a error while creating the database ",error);
+    }
 })
+
