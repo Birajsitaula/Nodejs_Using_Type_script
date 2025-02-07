@@ -4,7 +4,7 @@ import { Router, Request, Response } from "express";
 
 const router = Router();
 
-router.post("/name",async(req:Request , res:Response)=>
+router.post("/add",async(req:Request , res:Response)=>
 {
     const {email, password} = req.body;
     try{
