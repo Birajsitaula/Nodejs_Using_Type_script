@@ -13,13 +13,7 @@ router.post("/add",async(req:Request , res:Response)=>
              res.status(501).json({message:"Please enter the email and the password "});
              return;
         }
-    //     const existingUser = await userModel.findOne({email})
-    //    if(existingUser)
-    //    {
-    //     res.status(400).json({message:"User already existing "})
-    //     return;;
-    //    }
-
+   
     const saltRounds = 10 ;
     const hashPassword = await hash(password,saltRounds) as any;
     const newUser = await  userModel.create({email, password: hashPassword});
@@ -34,4 +28,6 @@ router.post("/add",async(req:Request , res:Response)=>
     }
 
 })
+
+// READ , UPDATE , AND DELETE SOON...
 export default router;
