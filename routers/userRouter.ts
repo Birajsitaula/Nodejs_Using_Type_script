@@ -1,6 +1,6 @@
 import userModel from "../models/userModel";
 import { Router, Request, Response } from "express";
-import * as bcrypt from 'bcrypt';
+import {hash} from "bcrypt";
 
 const router = Router();
 
@@ -21,7 +21,7 @@ router.post("/add",async(req:Request , res:Response)=>
     //    }
 
     const saltRounds = 10 ;
-    const hashPassword :any = await bcrypt.hash(password,saltRounds)
+    const hashPassword = await hash(password,saltRounds) as any;
     const newUser = await  userModel.create({email, password: hashPassword});
     res.status(200).json({message:"user update successfully",newUser})
 
