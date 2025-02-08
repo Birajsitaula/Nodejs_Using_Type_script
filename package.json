@@ -4,21 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn --transpile-only index.ts"
+    "start": "ts-node ./index.ts",
+    "dev": "nodemon ./index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
-    "ts-node-dev": "^2.0.0"
+    "@types/bcryptjs": "^2.4.6",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@types/express": "^5.0.0",
     "@types/sequelize": "^4.28.20",
     "bcrypt": "^5.1.1",
-    "bcrypt-ts": "^5.0.3",
     "cons": "^0.0.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
