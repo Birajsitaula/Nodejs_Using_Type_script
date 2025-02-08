@@ -25,8 +25,7 @@ router.post("/add",async(req:Request , res:Response)=>
     const newUser = await  userModel.create({email, password: hashPassword});
     res.status(200).json({message:"user update successfully",newUser})
 
-    // const newUser = await userModel.create({email,password});    //  ==> without using the bcrypt 
-    // res.status(201).json({message :"user updated successfully ",newUser}) // ==> without using the bcrypt 
+    
     }
     catch(err)
     {
