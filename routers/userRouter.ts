@@ -1,6 +1,7 @@
 import userModel from "../models/userModel";
 import { Router, Request, Response } from "express";
 import { hash } from "bcrypt";
+// import { where } from "sequelize";
 
 const router = Router();
 
@@ -51,4 +52,26 @@ router.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
+// Delete the user from the database
+router.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
+      res.status(400).json({ message: "Error! unable to delete the data " });
+      return;
+    }
+    const user = await userModel.destroy({
+      where: { id },
+    });
+    res.status(201).json({ message: "User Deleted successfully", user });
+  } catch (err) {
+    console.error(
+      "There is an error while Delete the data from the database ",
+      err
+    );
+    res.status(500).json({
+      message: "There is an error while Delete the data from the database ",
+    });
+  }
+});
 export default router;
