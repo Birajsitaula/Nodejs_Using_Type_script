@@ -1,6 +1,8 @@
 import userModel from "../models/userModel";
 import { Router, Request, Response } from "express";
-import { hash } from "bcrypt";
+// import { hash } from "bcrypt";
+import * as bcrypt from "bcrypt";
+
 // import { where } from "sequelize";
 
 const router = Router();
@@ -48,6 +50,47 @@ router.get("/:id", async (req: Request, res: Response) => {
     );
     res.status(500).json({
       message: "There is an error while fetching the data from the database ",
+    });
+  }
+});
+
+// Update the data from the database
+router.put("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { email, password } = req.body;
+  try {
+    if (!id) {
+      res.status(500).json({ message: "Error user not found " });
+      return;
+    }
+
+    const findUser = await userModel.findOne({ where: { id } });
+    if (!findUser) {
+      res
+        .status(404)
+        .json({ message: "Unable to find the user from the database " });
+      return;
+    }
+
+    const saltRounds = 10;
+
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      await userModel.update(
+        { email, password: hashedPassword },
+        { where: { id } }
+      );
+    }
+    res
+      .status(200)
+      .json({ message: "User update successfully ", id, password });
+  } catch (error) {
+    console.log(
+      "There is an error while updating the data from the database ",
+      error
+    );
+    res.status(500).json({
+      message: "There is an error while updating the data from the database",
     });
   }
 });
